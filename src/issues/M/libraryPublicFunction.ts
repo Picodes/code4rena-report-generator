@@ -8,7 +8,7 @@ const issue: ASTIssue = {
   type: IssueTypes.M,
   title: 'Library function isn\'t `internal` or `private`',
   description:
-    'In a library, using an external or public visibility means that we won\'t be going through the library with a DELEGATECALL but with a CALL. This changes the context and should be done carefully.',
+    'In a library, using an external or public visibility means that the function can only be accessed via `DELEGATECALL` on chain (in case the library is deployed on chain). This changes the context and should be done carefully. For Solidity libraries with internal functions, they are not deployed on chain and are executed with a jump instruction in the contract.',
   detector: (files: InputType): Instance[] => {
     let instances: Instance[] = [];
     for (const file of files) {
