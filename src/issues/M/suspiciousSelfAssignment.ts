@@ -34,8 +34,7 @@ const issue: ASTIssue = {
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Suspicious Self Assignment',
-  description:
-    'The current self-assignment is either redundant or incorrect, which signifies that a potential incorrect value assignment.',
+  description: 'A self-assignment occurs when a variable or state is assigned a value that is already held by that variable or state itself. This situation often indicates a potential issue in the code, which can be redundant or incorrect. Specifically, self-assignment might suggest that the value assignment does not change the state of the variable, or it could be a sign of a logical error.',
   detector: (files: InputType): Instance[] => {
     let instances: Instance[] = [];
 
