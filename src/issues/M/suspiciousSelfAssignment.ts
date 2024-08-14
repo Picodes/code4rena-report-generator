@@ -3,19 +3,24 @@ import { findAll } from 'solidity-ast/utils';
 import { instanceFromSRC } from '../../utils';
 import { Expression } from 'solidity-ast';
 
-
+// Iterative compare function to compare left and right nodes.
 function compare(left: Expression | null | undefined, right: Expression | null | undefined): boolean {
-    if (left == null || right == null) return false;    
+    // If null/undefined, return false
+    if (left == null || right == null) return false;
+    // If nodeType Not equal, return false  
     if (left.nodeType != right.nodeType) return false;
     
+    // Literal
     if (left.nodeType == "Literal" && right.nodeType == "Literal") {
         return left.value == right.value;
     }
 
+    // Identifier
     if (left.nodeType == "Identifier" && right.nodeType == "Identifier") {
         return left.name == right.name;
     }
 
+    // IndexAccess
     if (left.nodeType == "IndexAccess" && right.nodeType == "IndexAccess") {
         let base = compare(left.baseExpression,right.baseExpression) 
         let index = compare(left.indexExpression,right.indexExpression);
